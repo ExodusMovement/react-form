@@ -1,0 +1,361 @@
+// transition mixin
+@mixin transition($transition...) {
+  $prefixes: ('-webkit', '-ms', '-o');
+
+  @each $prefix in $prefixes {
+    #{$prefix}-transition: $transition;
+  }
+
+  transition: $transition;
+}
+
+.react-form {
+  &__button {
+    display: block;
+    background-image: linear-gradient(281deg, #420be6, #a16bb3);
+    color: #fff;
+    position: relative;
+    opacity: 0.8;
+    @include transition(opacity 200ms linear);
+    width: 240px;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    border: transparent 1px solid;
+    outline: none;
+    padding: 2px;
+    background-clip: padding-box;
+    box-shadow: 0 10px 30px 0 rgba(111, 57, 205, 0.3);
+    text-decoration: none;
+    background-size: 101%;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .react-form__button-align {
+      display: block;
+      height: 100%;
+      line-height: 42px;
+      cursor: pointer;
+      border-radius: 24px;
+    }
+
+    .react-form__button-align-text {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &-container {
+    line-height: 1.5;
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+
+    &__submit-button {
+      outline: none !important;
+    }
+
+    &__validate-message {
+      color: red;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    &__loading-container {
+      height: 0;
+      width: 580px;
+      position: relative;
+      top: -52px;
+    }
+  }
+
+  &-field {
+    margin-bottom: 60px;
+
+    &__label {
+      display: block;
+      font-size: 20px;
+      color: #5438da;
+
+      &--optional {
+        font-size: 16px;
+        color: rgba(31, 32, 51, 0.4);
+      }
+    }
+
+    label:not(.react-form-field__label) {
+      font-size: 14px;
+    }
+
+    textarea,
+    input[type='text'],
+    input[type='date'],
+    input[type='number'],
+    input[type='email'] {
+      font-family: inherit;
+      font-size: 14px;
+      line-height: inherit;
+      border-radius: 4px;
+      outline: none;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 5px 10px;
+      width: 300px;
+      color: #333;
+    }
+
+    textarea {
+      width: 600px;
+      display: block;
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+
+    .react-form-check-inline {
+      display: inline-block;
+      margin-right: 60px;
+    }
+
+    .react-form-check:not(.react-form-check-inline) {
+      label {
+        display: inline-block;
+      }
+    }
+
+    input[type='radio'],
+    input[type='checkbox'] {
+      margin-right: 10px;
+      position: relative;
+      bottom: 1px;
+    }
+
+    select {
+      min-width: 200px;
+      height: 32px;
+      border-color: rgba(0, 0, 0, 0.08);
+      font-size: 14px;
+      outline: none;
+    }
+
+    &__file-input {
+      position: relative;
+
+      &-label {
+        position: relative;
+
+        .react-form__button-align {
+          line-height: 32px;
+          font-size: 12px;
+        }
+      }
+
+      &-background {
+        position: absolute;
+        background-image: linear-gradient(281deg, #a988be, #6150e1);
+        opacity: 1;
+      }
+
+      &-filename {
+        position: absolute;
+        top: 7px;
+        font-size: 14px;
+        left: 119px;
+        cursor: default;
+      }
+
+      .react-form__button {
+        height: 36px;
+        width: 111px;
+        border: none;
+        border-radius: 18px;
+      }
+
+      input[type='file'] {
+        position: absolute;
+        top: 0;
+        font-size: 14px;
+        left: 0;
+        outline: none;
+        pointer-events: none;
+        visibility: hidden;
+      }
+    }
+
+    &__validate-message {
+      color: red;
+      font-size: 13px;
+    }
+
+    &__type-short_text,
+    &__type-free_text,
+    &__type-dropdown,
+    &__type-date,
+    &__type-numeric,
+    &__type-multiple_choice,
+    &__type-boolean {
+      .react-form-field__validate-message {
+        margin-top: 3px;
+        margin-left: 6px;
+      }
+    }
+
+    &__type-file {
+      .react-form-field__validate-message {
+        margin-top: 12px;
+        margin-left: 6px;
+      }
+    }
+  }
+
+  &__loading-symbol {
+    transform: scale(0.25);
+    position: relative;
+    bottom: 131px;
+
+    .loading-container {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      transform: translate(-50%, -50%);
+      margin: auto;
+      filter: url('#goo');
+      animation: rotate-move 2s ease-in-out infinite;
+      top: 100px;
+      left: 100px;
+    }
+
+    .dot {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #000;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .dot-3 {
+      background-color: #ff8a73;
+      animation: dot-3-move 2s ease infinite, index 6s ease infinite;
+    }
+
+    .dot-2 {
+      background-color: #58db58;
+      animation: dot-2-move 2s ease infinite, index 6s -4s ease infinite;
+    }
+
+    .dot-1 {
+      background-color: #4a90e2;
+      animation: dot-1-move 2s ease infinite, index 6s -2s ease infinite;
+    }
+
+    @keyframes dot-3-move {
+      20% {
+        transform: scale(1);
+      }
+      45% {
+        transform: translateY(-18px) scale(0.45);
+      }
+      60% {
+        transform: translateY(-90px) scale(0.45);
+      }
+      80% {
+        transform: translateY(-90px) scale(0.45);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    @keyframes dot-2-move {
+      20% {
+        transform: scale(1);
+      }
+      45% {
+        transform: translate(-16px, 12px) scale(0.45);
+      }
+      60% {
+        transform: translate(-80px, 60px) scale(0.45);
+      }
+      80% {
+        transform: translate(-80px, 60px) scale(0.45);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    @keyframes dot-1-move {
+      20% {
+        transform: scale(1);
+      }
+      45% {
+        transform: translate(16px, 12px) scale(0.45);
+      }
+      60% {
+        transform: translate(80px, 60px) scale(0.45);
+      }
+      80% {
+        transform: translate(80px, 60px) scale(0.45);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    @keyframes rotate-move {
+      55% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      80% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes index {
+      0%,
+      100% {
+        z-index: 3;
+      }
+      33.3% {
+        z-index: 2;
+      }
+      66.6% {
+        z-index: 1;
+      }
+    }
+  }
+}
