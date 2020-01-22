@@ -2,9 +2,9 @@
 
 ### [Live Demo](https://www.exodus.io/job-application/?id=9039189C56&title=Test%20Job%20Post)
 
-A simple React form component to gather information from users.
+A simple React form component to gather data from users.
 
-The component takes a `fields` prop and generates a form interface. When the user clicks the "Submit" button, the `onSubmit` callback receives the form data.
+The component takes a `fields` prop and generates a form interface. When the user clicks the "Submit" button, the `onSubmit` callback is called with a responses object.
 
 Server requests are not within the scope of this componenet; you can do whatever you like with the data that is returned.
 
@@ -14,9 +14,15 @@ The component comes with a set of default styles, which you can override if you 
 
 If you have a feature request, please open an issue and we'll get to it asap.
 
+## Installation
+
+```
+yarn add @exodus/react-form
+```
+
 ## Input Types
 
-The demo above contains all supported input types:
+The [live demo](https://www.exodus.io/job-application/?id=9039189C56&title=Test%20Job%20Post) demonstrates all supported input types:
 
 - `short_text`: Simple text input.
 - `free_text`: Paragraph input.
@@ -29,17 +35,17 @@ The demo above contains all supported input types:
 
 ## Example Usage
 
-The following is a complete example, including:
+The following is a complete example which includes:
 
-- An example array passed as the `fields` prop, showing what data to include for each input type.
+- A sample array passed as the `fields` prop, showing what data to include for each input type. For example, the `file` type expects a `supported_file_types` array.
 
-- Usage of the `loading` prop: The "Submit" button is deactivated when set to true. (optional prop)
+- Usage of the `loading` prop: The "Submit" button is deactivated when set to true. (optional)
 
-- Usage of `showWarning` and `warningText` props: Shows warning text beneath the "Submit" button. (optional props)
+- Usage of `showWarning` and `warningText` props: Shows warning text beneath the "Submit" button. (optional)
 
-- Beneath the code snippet, there is an example `responses` object, which is passed to the `onSubmit` callback.
+- Beneath the code example, there is a sample responses object. This is what you can expect the `onSubmit` callback to receive.
 
-```
+```javascript
 import React from 'react'
 import ReactForm from '@exodus/react-form'
 
@@ -49,7 +55,7 @@ const fields = [
     body: 'Full name', // Question text
     type: 'short_text',
     required: true,
-    id: '22e55a'
+    id: '22e55a',
   },
   {
     body: 'Email',
@@ -75,20 +81,26 @@ const fields = [
     body: 'Test Yes/No',
     type: 'boolean',
     required: true,
-    id: '22e560'
+    id: '22e560',
   },
   {
     body: 'Test Dropdown',
     type: 'dropdown',
     required: true,
-    choices: [{ body: 'choice 1', id: '107f36' }, { body: 'choice2', id: '107f37' }],
+    choices: [
+      { body: 'choice 1', id: '107f36' },
+      { body: 'choice2', id: '107f37' },
+    ],
     id: '22e561',
   },
   {
     body: 'Test Multiple choice',
     type: 'multiple_choice',
     required: true,
-    choices: [{ body: 'choice 1', id: '107f38' }, { body: 'choice 2', id: '107f39' }],
+    choices: [
+      { body: 'choice 1', id: '107f38' },
+      { body: 'choice 2', id: '107f39' },
+    ],
     id: '22e562',
   },
   {
@@ -96,20 +108,23 @@ const fields = [
     type: 'multiple_choice',
     required: true,
     single_answer: true,
-    choices: [{ body: 'choice 1', id: '107f3a' }, { body: 'choice 2', id: '107f3b' }],
+    choices: [
+      { body: 'choice 1', id: '107f3a' },
+      { body: 'choice 2', id: '107f3b' },
+    ],
     id: '22e563',
   },
   {
     body: 'Test Date',
     type: 'date',
     required: true,
-    id: '22e564'
+    id: '22e564',
   },
   {
     body: 'Test Number',
     type: 'numeric',
     required: true,
-    id: '22e565'
+    id: '22e565',
   },
 ]
 
@@ -168,13 +183,13 @@ class MyPage extends React.PureComponent {
 }
 
 export default MyPage
-
 ```
 
-Example `responses` object passed to the `onSubmit` callback. The object keys are the `id`s passed with the `fields` prop. For required fields, `isSet` will always be true.
+Example responses object passed to the `onSubmit` callback as its first parameter. The object keys are the `id`s that were passed to the component with the `fields` prop. For required fields, `isSet` will always be true.
 
-```
-// short_text
+```javascript
+{
+  // short_text
   '22e55a': { value: 'Barty Crouch', isValid: true, isSet: true },
 
   // short_text (validate: 'email')
@@ -203,4 +218,5 @@ Example `responses` object passed to the `onSubmit` callback. The object keys ar
 
   // numeric
   '22e565': { value: 123, isValid: true, isSet: true },
+}
 ```
