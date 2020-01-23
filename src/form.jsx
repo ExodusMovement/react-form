@@ -1,7 +1,6 @@
 import React from 'react'
 import Field from './field.jsx'
 import LoadingSymbol from './loading-symbol.jsx'
-import './styles.scss'
 
 class Form extends React.PureComponent {
   constructor(props, context) {

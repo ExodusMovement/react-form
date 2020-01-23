@@ -20,6 +20,8 @@ If you have a feature request, please open an issue and we'll get to it asap.
 yarn add @exodus/react-form
 ```
 
+You will also need some CSS to make it look right. This should be included alongside the component. An example theme can be found in [styles.scss](https://github.com/ExodusMovement/react-form/blob/master/styles.scss)
+
 ## Input Types
 
 The [live demo](https://www.exodus.io/job-application/?id=9039189C56&title=Test%20Job%20Post) demonstrates all supported input types:
@@ -48,6 +50,7 @@ The following is a complete example which includes:
 ```javascript
 import React from 'react'
 import ReactForm from '@exodus/react-form'
+import '~/styles/react-form.scss'
 
 // Example fields data
 const fields = [
