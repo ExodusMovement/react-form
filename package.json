@@ -1,6 +1,6 @@
 {
   "name": "@exodus/react-form",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Customizable form component",
   "main": "./lib/Form.js",
   "license": "MIT",
