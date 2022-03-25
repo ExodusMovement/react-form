@@ -360,10 +360,7 @@ class FormField extends React.PureComponent {
 
     this.state = {
       value: undefined,
-      isValid:
-        !props.required ||
-        props.type === 'dropdown' ||
-        (props.type === 'multiple_choice' && !props.singleAnswer),
+      isValid: !props.required || (props.type === 'multiple_choice' && !props.singleAnswer),
 
       message: 'This is required',
       validateActive: false,
