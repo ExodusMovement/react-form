@@ -120,7 +120,12 @@ class DropdownInput extends React.PureComponent {
   }
 
   onChange(e) {
-    this.props.onChange({ value: [e.target.value], isSet: true })
+    const value = e.target.value
+
+    const { choices } = this.props
+    const firstOptionValue = choices && choices[0].id
+
+    this.props.onChange({ value: [value], isSet: value !== firstOptionValue })
   }
 
   render() {
@@ -371,8 +376,7 @@ class FormField extends React.PureComponent {
   setInitialValue(value) {
     this.setState({ value })
 
-    // only type dropdown starts isSet (first item in the dropdown is selected)
-    const isSet = this.props.type === 'dropdown'
+    const isSet = false
 
     this.props.onChange(this.props.id, value, this.state.isValid, isSet)
   }

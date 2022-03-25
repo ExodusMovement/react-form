@@ -29,7 +29,7 @@ The [live demo](https://www.exodus.io/job-application/?id=9039189C56&title=Test%
 - `short_text`: Simple text input.
 - `free_text`: Paragraph input.
 - `boolean`: Displays two radio inputs with "Yes" & "No" labels.
-- `dropdown`: This will always have `isSet` as `true`, since the first of the `choices` will be selected by default.
+- `dropdown`: Provide an array of `choices`, see below example for details. `isSet` is true if an option other than the first is selected.
 - `multiple_choice`: If `single_answer` is set to true, it displays the options as radio inputs, if not then as checkboxes.
 - `date`: Returns a date in the format yyyy-mm-dd
 - `numeric`: Accepts float as well as int values.
