@@ -270,10 +270,7 @@ function getFileData(e, done) {
     // base64 file data
     const file = e.nativeEvent.srcElement.files[0]
     const filename = e.target.value.split(/(\\|\/)/g).pop()
-    const filetype = filename
-      .split('.')
-      .pop()
-      .toLowerCase()
+    const filetype = filename.split('.').pop().toLowerCase()
 
     const reader = new FileReader()
     reader.readAsBinaryString(file)
@@ -282,7 +279,7 @@ function getFileData(e, done) {
       done({ name: filename, data: btoa(reader.result) }, filetype)
     }
 
-    reader.onerror = function() {
+    reader.onerror = function () {
       console.error('Error while encoding file data')
       done('')
     }
@@ -398,16 +395,8 @@ class FormField extends React.PureComponent {
   }
 
   render() {
-    const {
-      type,
-      id,
-      body,
-      choices,
-      singleAnswer,
-      required,
-      supportedFileTypes,
-      validate,
-    } = this.props
+    const { type, id, body, choices, singleAnswer, required, supportedFileTypes, validate } =
+      this.props
     const { isValid, validateActive } = this.state
 
     let input
