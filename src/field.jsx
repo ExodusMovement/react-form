@@ -125,10 +125,6 @@ class DropdownInput extends React.PureComponent {
     const { choices } = this.props
     const firstOptionValue = choices && choices[0].id
 
-    console.log(value)
-    console.log(choices)
-    console.log(firstOptionValue)
-
     this.props.onChange({ value: [value], isSet: value !== firstOptionValue })
   }
 
