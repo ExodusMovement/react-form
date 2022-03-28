@@ -112,7 +112,7 @@ class DropdownInput extends React.PureComponent {
   constructor(props, context) {
     super(props, context)
 
-    props.setInitialValue(props.choices ? [props.choices[0].id] : [])
+    props.setInitialValue([])
 
     this.state = {}
 
@@ -122,17 +122,19 @@ class DropdownInput extends React.PureComponent {
   onChange(e) {
     const value = e.target.value
 
-    const { choices } = this.props
-    const firstOptionValue = choices && choices[0].id
+    const isSet = value !== 'no-answer'
 
-    this.props.onChange({ value: [value], isSet: value !== firstOptionValue })
+    this.props.onChange({ value: isSet ? [value] : [], isSet })
   }
 
   render() {
-    const { choices } = this.props
+    const { isSet, choices } = this.props
+
+    const choicesProcessed = [{ id: 'no-answer', body: 'Select an option…' }, ...choices]
+
     return (
-      <select as="select" onChange={this.onChange}>
-        {choices.map((choice) => (
+      <select className={classNames({ 'is-set': !!isSet })} as="select" onChange={this.onChange}>
+        {choicesProcessed.map((choice) => (
           <option key={choice.id} value={choice.id}>
             {choice.body}
           </option>
@@ -360,6 +362,7 @@ class FormField extends React.PureComponent {
 
     this.state = {
       value: undefined,
+      isSet: false,
       isValid: !props.required || (props.type === 'multiple_choice' && !props.singleAnswer),
 
       message: 'This is required',
@@ -384,7 +387,7 @@ class FormField extends React.PureComponent {
       message = 'This is required'
     }
 
-    this.setState({ value, isValid, message, validateActive: false })
+    this.setState({ value, isSet, isValid, message, validateActive: false })
     this.props.onChange(this.props.id, value, isValid, isSet)
   }
 
@@ -398,7 +401,7 @@ class FormField extends React.PureComponent {
   render() {
     const { type, id, body, choices, singleAnswer, required, supportedFileTypes, validate } =
       this.props
-    const { isValid, validateActive } = this.state
+    const { isValid, isSet, validateActive } = this.state
 
     let input
     switch (type) {
@@ -425,6 +428,7 @@ class FormField extends React.PureComponent {
       case 'dropdown':
         input = (
           <DropdownInput
+            isSet={isSet}
             choices={choices}
             setInitialValue={this.setInitialValue}
             onChange={this.onChange}

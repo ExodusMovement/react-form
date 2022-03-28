@@ -167,6 +167,11 @@
       border-color: rgba(0, 0, 0, 0.08);
       font-size: 14px;
       outline: none;
+      padding: 0 5px;
+
+      &:not(.is-set) {
+        color: #999;
+      }
     }
 
     // native file inputs are not customizable, implement our own
